@@ -166,7 +166,7 @@ start_k8s() {
             DOCKER_CONF="/etc/default/docker"
             echo "DOCKER_OPTS=\"\$DOCKER_OPTS --mtu=${FLANNEL_MTU} --bip=${FLANNEL_SUBNET}\"" | tee -a ${DOCKER_CONF}
             ifconfig docker0 down
-            apt-get install bridge-utils
+            apt-get install -y bridge-utils
             brctl delbr docker0
             service docker stop
             while [ `ps aux | grep /usr/bin/docker | grep -v grep | wc -l` -gt 0 ]; do
